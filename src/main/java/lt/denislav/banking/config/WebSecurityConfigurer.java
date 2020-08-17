@@ -8,15 +8,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailService userDetailService;
-
-	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	@Bean
@@ -26,7 +23,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override
 	@Bean
-	public UserDetailsService userDetailsServiceBean() throws Exception {
+	public UserDetailsService userDetailsServiceBean() {
 		return userDetailService;
 	}
 

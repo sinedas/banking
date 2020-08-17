@@ -8,6 +8,7 @@ import lt.denislav.banking.model.Account;
 import lt.denislav.banking.model.User;
 import lt.denislav.banking.repository.AccountRepository;
 import lt.denislav.banking.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final AccountRepository accountRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public User register(RegisterUserDto userDto) {
@@ -30,7 +32,7 @@ public class UserService {
 		}
 
 		User user = new User();
-		user.setPassword(userDto.getPassword());
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setEmail(userDto.getEmail());
 		userRepository.save(user);
 
